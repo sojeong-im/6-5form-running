@@ -1,0 +1,180 @@
+/* Custom Styles for Form */
+body {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+}
+
+/* Speed lines background animation */
+.speed-lines {
+    background-image: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 20px,
+        rgba(255, 255, 255, 0.02) 20px,
+        rgba(255, 255, 255, 0.02) 40px
+    );
+    background-size: 200% 200%;
+    animation: speedLines 30s linear infinite;
+}
+
+@keyframes speedLines {
+    0% { background-position: 0 0; }
+    100% { background-position: -200% -200%; }
+}
+
+/* Input Fields */
+.input-field {
+    width: 100%;
+    background-color: #18181b; /* zinc-900 */
+    border: 2px solid #27272a; /* zinc-800 */
+    border-radius: 1rem;
+    padding: 1.125rem 1.25rem;
+    color: white;
+    font-size: 1.0625rem;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.input-field:focus {
+    outline: none;
+    border-color: #00D05A;
+    background-color: #09090b;
+    box-shadow: 0 0 0 4px rgba(0, 208, 90, 0.15);
+}
+
+.input-field::placeholder {
+    color: #52525b; /* zinc-500 */
+}
+
+/* Error state for inputs */
+.input-error {
+    border-color: #ef4444 !important;
+    animation: shake 0.4s ease-in-out;
+}
+
+/* Radio & Checkbox Cards (Typeform Style) */
+.radio-card .card-content {
+    padding: 1.25rem;
+    border: 2px solid #27272a;
+    border-radius: 1rem;
+    background-color: #18181b;
+    font-weight: 600;
+    font-size: 1.0625rem;
+    color: #a1a1aa; /* zinc-400 */
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.radio-card:hover .card-content {
+    border-color: #3f3f46;
+    background-color: #27272a;
+}
+
+.radio-card input:checked + .card-content {
+    border-color: #00D05A;
+    background-color: rgba(0, 208, 90, 0.08);
+    color: white;
+    box-shadow: 0 4px 20px rgba(0, 208, 90, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Checkbox Chips */
+.checkbox-chip {
+    flex-grow: 1;
+}
+
+.checkbox-chip .chip-content {
+    padding: 1rem 1.25rem;
+    border: 2px solid #27272a;
+    border-radius: 3rem;
+    background-color: #18181b;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #a1a1aa;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkbox-chip:hover .chip-content {
+    border-color: #3f3f46;
+    background-color: #27272a;
+}
+
+.checkbox-chip input:checked + .chip-content {
+    border-color: #00D05A;
+    background-color: #00D05A;
+    color: black;
+    box-shadow: 0 4px 15px rgba(0, 208, 90, 0.25);
+    transform: translateY(-2px);
+}
+
+/* Error state container for groups */
+.group-error {
+    padding: 0.75rem;
+    border: 2px dashed #ef4444;
+    border-radius: 1.25rem;
+    animation: shake 0.4s ease-in-out;
+}
+
+/* Animations */
+.slide-in-right {
+    animation: slideInRight 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.slide-out-left {
+    animation: slideOutLeft 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px) skewX(2deg);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) skewX(0);
+    }
+}
+
+@keyframes slideOutLeft {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-30px) skewX(-2deg);
+    }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* Custom Scrollbar for Textareas */
+textarea::-webkit-scrollbar {
+    width: 8px;
+}
+textarea::-webkit-scrollbar-track {
+    background: #18181b;
+    border-radius: 4px;
+}
+textarea::-webkit-scrollbar-thumb {
+    background: #3f3f46;
+    border-radius: 4px;
+}
+textarea::-webkit-scrollbar-thumb:hover {
+    background: #52525b;
+}
+
+/* Hide native scrollbar for main content to keep it clean on desktop */
+main::-webkit-scrollbar {
+    display: none;
+}
+main {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}

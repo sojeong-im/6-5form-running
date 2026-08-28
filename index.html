@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>러닝의민족 2기 신청폼 🏃</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Pretendard Font -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+</head>
+<body class="bg-[#111111] text-zinc-100 font-sans selection:bg-[#00D05A] selection:text-black">
+    <!-- background speed lines effect -->
+    <div class="speed-lines fixed inset-0 pointer-events-none opacity-20 z-0"></div>
+
+    <div class="max-w-2xl mx-auto min-h-[100dvh] flex flex-col relative z-10 bg-[#111111]/80 backdrop-blur-sm shadow-2xl">
+        <!-- Header & Progress -->
+        <header class="sticky top-0 bg-[#111111]/95 backdrop-blur-md z-50 pt-6 pb-5 px-6 border-b border-zinc-800">
+            <div class="flex justify-between items-end mb-3">
+                <h1 class="text-2xl font-black italic tracking-tight text-white uppercase transform -skew-x-6">
+                    러닝의민족 <span class="text-[#00D05A]">2기</span>
+                </h1>
+                <span id="step-indicator" class="text-sm font-bold text-zinc-400 bg-zinc-800 px-3 py-1 rounded-full">1 / 3</span>
+            </div>
+            
+            <!-- Running Progress Bar -->
+            <div class="h-2.5 bg-zinc-800 rounded-full relative overflow-visible mt-4">
+                <div id="progress-fill" class="absolute top-0 left-0 h-full bg-[#00D05A] rounded-full transition-all duration-700 ease-out shadow-[0_0_10px_rgba(0,208,90,0.5)]" style="width: 33%;"></div>
+                <div id="runner-icon" class="absolute top-1/2 -translate-y-1/2 text-2xl transition-all duration-700 ease-out transform -scale-x-100 drop-shadow-md" style="left: 33%; margin-left: -12px; z-index: 10;">🏃</div>
+            </div>
+        </header>
+
+        <!-- Form Container -->
+        <main class="flex-1 px-6 py-8 overflow-y-auto relative pb-32">
+            <form id="apply-form" class="h-full">
+                
+                <!-- STEP 1: Basic Info -->
+                <section id="step-1" class="form-step active slide-in-right">
+                    <div class="mb-10">
+                        <div class="inline-block bg-[#00D05A] text-black font-bold px-3 py-1 rounded-md text-sm mb-3 transform -skew-x-6">INFO</div>
+                        <h2 class="text-3xl font-black mb-2 text-white tracking-tight">나를 소개할게요! 👋</h2>
+                        <p class="text-zinc-400">함께 달리기 위한 기본적인 정보를 알려주세요.</p>
+                    </div>
+
+                    <div class="space-y-8">
+                        <!-- Q1 -->
+                        <div class="form-group">
+                            <label class="block text-lg font-bold mb-3">1. 이름을 알려주세요!</label>
+                            <input type="text" required class="input-field" placeholder="홍길동">
+                        </div>
+                        
+                        <!-- Q2 -->
+                        <div class="form-group">
+                            <label class="block text-lg font-bold mb-3">2. 나이를 알려주세요!</label>
+                            <input type="number" required class="input-field" placeholder="24">
+                        </div>
+
+                        <!-- Q3 -->
+                        <div class="form-group">
+                            <label class="block text-lg font-bold mb-3">3. 학교 / 학과 / 학년을 알려주세요!</label>
+                            <p class="text-sm text-zinc-400 mb-3">휴학생이라면 휴학 중이라고 함께 적어주세요 :)</p>
+                            <input type="text" required class="input-field" placeholder="한국대 / 체육학과 / 3학년 (휴학)">
+                        </div>
+
+                        <!-- Q4 -->
+                        <div class="form-group">
+                            <label class="block text-lg font-bold mb-3">4. 연락 가능한 전화번호를 남겨주세요!</label>
+                            <input type="tel" required class="input-field" placeholder="010-1234-5678">
+                        </div>
+
+                        <!-- Q5 -->
+                        <div class="form-group">
+                            <label class="block text-lg font-bold mb-3">5. 현재 거주 지역 또는 주로 활동하는 지역은 어디인가요?</label>
+                            <input type="text" required class="input-field" placeholder="예: 관악구 / 신림·서울대입구 부근">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- STEP 2: Running & Activity -->
+                <section id="step-2" class="form-step hidden">
+                    <div class="mb-10">
+                        <div class="inline-block bg-[#00D05A] text-black font-bold px-3 py-1 rounded-md text-sm mb-3 transform -skew-x-6">STYLE</div>
+                        <h2 class="text-3xl font-black mb-2 text-white tracking-tight">어떻게 뛰고 있나요? 👟</h2>
+                        <p class="text-zinc-400">러닝 스타일과 목표를 알려주세요.</p>
+                    </div>
+
+                    <div class="space-y-10">
+                        <!-- Q6 -->
+                        <div class="form-group">
+                            <label class="block text-lg font-bold mb-4">6. 현재 나의 러닝 레벨은 어디에 가장 가까운가요?</label>
+                            <div class="grid gap-3">
+                                <label class="radio-card">
+                                    <input type="radio" name="q6" value="1" required class="peer sr-only">
+                                    <div class="card-content">러닝은 거의 처음이에요 🐣</div>
+                                </label>
+                                <label class="radio-card">
+                                    <input type="radio" name="q6" value="2" class="peer sr-only">
+                                    <div class="card-content">뛰다 걷다 정도는 가능해요 🚶🏃</div>
+                                </label>
+                                <label class="radio-card">
+                                    <input type="radio" name="q6" value="3" class="peer sr-only">
+                                    <div class="card-content">3km 정도는 달릴 수 있어요 🏃‍♀️</div>
+                                </label>
+                                <label class="radio-card">
+                                    <input type="radio" name="q6" value="4" class="peer sr-only">
+                                    <div class="card-content">5km 이상도 달려봤어요 🔥</div>
+                                </label>
+                                <label class="radio-card">
+                                    <input type="radio" name="q6" value="5" class="peer sr-only">
+                                    <div class="card-content">꾸준히 러닝하고 있어요 💨</div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Q7 -->
+                        <div class="form-group">
+                            <label class="block text-lg font-bold mb-2">7. 러닝의민족에서 이루고 싶은 작은 목표가 있나요? 🌱</label>
+                            <p class="text-sm text-zinc-400 mb-3">예: 쉬지 않고 3km 뛰기 / 체력 키우기 / 러닝 습관 만들기</p>
+                            <textarea required class="input-field min-h-[100px] resize-none" placeholder="당신의 목표를 들려주세요!"></textarea>
+                        </div>
+
+                        <!-- Q8 -->
+                        <div class="form-group">
+                            <label class="block text-lg font-bold mb-2">8. 러닝하다 힘들어서 멈추고 싶을 때, 나를 다시 뛰게 만드는 건 뭘까요?</label>
+                            <p class="text-sm text-zinc-400 mb-3">음악, 맛있는 저녁, 옆에서 뛰는 사람, 기록 욕심 등 뭐든 좋아요!</p>
+                            <textarea required class="input-field min-h-[100px] resize-none" placeholder="나만의 원동력은..."></textarea>
+                        </div>
+
+                        <!-- Q9 -->
+                        <div class="form-group">
+                            <label class="block text-lg font-bold mb-4">9. 러닝 끝나고 딱 하나 할 수 있다면?</label>
+                            <div class="grid grid-cols-2 gap-3">
+                                <label class="radio-card">
+                                    <input type="radio" name="q9" value="1" required class="peer sr-only">
+                                    <div class="card-content text-center">🍕 맛있는 거 먹으러 가기</div>
+                                </label>
+                                <label class="radio-card">
+                                    <input type="radio" name="q9" value="2" class="peer sr-only">
+                                    <div class="card-content text-center">☕ 카페에서 수다 떨기</div>
+                                </label>
+                                <label class="radio-card">
+                                    <input type="radio" name="q9" value="3" class="peer sr-only">
+                                    <div class="card-content text-center">🍻 가볍게 한잔하기</div>
+                                </label>
+                                <label class="radio-card">
+                                    <input type="radio" name="q9" value="4" class="peer sr-only">
+                                    <div class="card-content text-center">📸 러닝 인증샷 남기기</div>
+                                </label>
+                                <label class="radio-card">
+                                    <input type="radio" name="q9" value="5" class="peer sr-only">
+                                    <div class="card-content text-center">🏠 바로 집 가서 씻고 눕기</div>
+                                </label>
+                                <label class="radio-card">
+                                    <input type="radio" name="q9" value="6" class="peer sr-only">
+                                    <div class="card-content text-center">🎲 그날 멤버들이 정하는 대로!</div>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Q10 -->
+                        <div class="form-group">
+                            <label class="block text-lg font-bold mb-4">10. 러닝의민족 첫 모임에서 가장 기대되는 순간은 무엇인가요?</label>
+                            <div class="grid gap-3">
+                                <label class="radio-card">
+                                    <input type="radio" name="q10" value="1" required class="peer sr-only">
+                                    <div class="card-content">처음 만난 사람들과 어색함 깨기 🧊</div>
+                                </label>
+                                <label class="radio-card">
+                                    <input type="radio" name="q10" value="2" class="peer sr-only">
+                                    <div class="card-content">다 같이 천천히 달려보기 🏃‍♂️🏃‍♀️</div>
+                                </label>
+                                <label class="radio-card">
+                                    <input type="radio" name="q10" value="3" class="peer sr-only">
+                                    <div class="card-content">서로 응원하면서 완주하기 🙌</div>
+                                </label>
+                                <label class="radio-card">
+                                    <input type="radio" name="q10" value="4" class="peer sr-only">
+                                    <div class="card-content">러닝 끝나고 같이 놀거나 이야기하기 🗣️</div>
+                                </label>
+                                <label class="radio-card">
+                                    <input type="radio" name="q10" value="5" class="peer sr-only">
+                                    <div class="card-content">새로운 러닝 코스를 가보는 것 🗺️</div>
+                                </label>
+                                <label class="radio-card">
+                                    <input type="radio" name="q10" value="6" class="peer sr-only">
+                                    <div class="card-content">그냥 새로운 경험 자체가 기대돼요! ✨</div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- STEP 3: Final Details -->
+                <section id="step-3" class="form-step hidden">
+                    <div class="mb-10">
+                        <div class="inline-block bg-[#00D05A] text-black font-bold px-3 py-1 rounded-md text-sm mb-3 transform -skew-x-6">FINISH</div>
+                        <h2 class="text-3xl font-black mb-2 text-white tracking-tight">거의 다 왔어요! 🏁</h2>
+                        <p class="text-zinc-400">일정과 추가적인 이야기를 들려주세요.</p>
+                    </div>
+
+                    <div class="space-y-10">
+                        <!-- Q11 -->
+                        <div class="form-group">
+                            <label class="block text-lg font-bold mb-4">11. 정기 러닝에 참여하기 편한 요일을 모두 선택해주세요.</label>
+                            <div class="flex flex-wrap gap-2.5">
+                                <label class="checkbox-chip">
+                                    <input type="checkbox" name="q11" value="mon" class="peer sr-only">
+                                    <div class="chip-content">월요일</div>
+                                </label>
+                                <label class="checkbox-chip">
+                                    <input type="checkbox" name="q11" value="tue" class="peer sr-only">
+                                    <div class="chip-content">화요일</div>
+                                </label>
+                                <label class="checkbox-chip">
+                                    <input type="checkbox" name="q11" value="wed" class="peer sr-only">
+                                    <div class="chip-content">수요일</div>
+                                </label>
+                                <label class="checkbox-chip">
+                                    <input type="checkbox" name="q11" value="thu" class="peer sr-only">
+                                    <div class="chip-content">목요일</div>
+                                </label>
+                                <label class="checkbox-chip">
+                                    <input type="checkbox" name="q11" value="fri" class="peer sr-only">
+                                    <div class="chip-content">금요일</div>
+                                </label>
+                                <label class="checkbox-chip">
+                                    <input type="checkbox" name="q11" value="sat" class="peer sr-only">
+                                    <div class="chip-content border-zinc-700 text-zinc-300">토요일</div>
+                                </label>
+                                <label class="checkbox-chip">
+                                    <input type="checkbox" name="q11" value="sun" class="peer sr-only">
+                                    <div class="chip-content border-zinc-700 text-zinc-300">일요일</div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Q12 -->
+                        <div class="form-group">
+                            <label class="block text-lg font-bold mb-4">12. 참여하기 편한 시간대를 모두 선택해주세요.</label>
+                            <div class="grid grid-cols-2 gap-3">
+                                <label class="checkbox-chip">
+                                    <input type="checkbox" name="q12" value="1" class="peer sr-only">
+                                    <div class="chip-content w-full text-center">평일 18시 이전</div>
+                                </label>
+                                <label class="checkbox-chip">
+                                    <input type="checkbox" name="q12" value="2" class="peer sr-only">
+                                    <div class="chip-content w-full text-center">평일 18~20시</div>
+                                </label>
+                                <label class="checkbox-chip">
+                                    <input type="checkbox" name="q12" value="3" class="peer sr-only">
+                                    <div class="chip-content w-full text-center">평일 20시 이후</div>
+                                </label>
+                                <label class="checkbox-chip">
+                                    <input type="checkbox" name="q12" value="4" class="peer sr-only">
+                                    <div class="chip-content w-full text-center">주말 오전</div>
+                                </label>
+                                <label class="checkbox-chip">
+                                    <input type="checkbox" name="q12" value="5" class="peer sr-only">
+                                    <div class="chip-content w-full text-center">주말 오후</div>
+                                </label>
+                                <label class="checkbox-chip">
+                                    <input type="checkbox" name="q12" value="6" class="peer sr-only">
+                                    <div class="chip-content w-full text-center">주말 저녁</div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Q13 -->
+                        <div class="form-group">
+                            <label class="block text-lg font-bold mb-2">13. 러닝 외에도 멤버들과 같이 해보고 싶은 활동이 있다면 알려주세요!</label>
+                            <p class="text-sm text-zinc-400 mb-3">예: 한강 피크닉, 등산, 배드민턴, 맛집, 전시 등</p>
+                            <textarea class="input-field min-h-[100px] resize-none" placeholder="자유롭게 적어주세요."></textarea>
+                        </div>
+
+                        <!-- Q14 -->
+                        <div class="form-group">
+                            <label class="block text-lg font-bold mb-2">14. 마지막으로, 러닝의민족에 지원한 이유를 자유롭게 적어주세요!</label>
+                            <p class="text-sm text-zinc-400 mb-3">거창하지 않아도 괜찮아요. 편하게 작성해주세요 :)</p>
+                            <textarea required class="input-field min-h-[150px] resize-none" placeholder="지원 동기를 듬뿍 담아주세요!"></textarea>
+                        </div>
+                    </div>
+                </section>
+            </form>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <footer class="fixed bottom-0 left-0 right-0 max-w-2xl mx-auto bg-[#111111]/95 backdrop-blur-md p-5 border-t border-zinc-800 flex justify-between gap-3 z-50">
+            <button id="btn-prev" class="hidden px-5 py-4 rounded-2xl font-bold bg-zinc-800 text-white hover:bg-zinc-700 transition-colors w-1/3 text-lg">
+                이전
+            </button>
+            <button id="btn-next" class="px-5 py-4 rounded-2xl font-black bg-[#00D05A] text-black hover:bg-[#00e664] transition-all w-full text-lg shadow-[0_0_20px_rgba(0,208,90,0.3)] transform active:scale-95 duration-200 flex items-center justify-center gap-2">
+                다음으로 <span class="text-2xl ml-1">💨</span>
+            </button>
+            <button id="btn-submit" class="hidden px-5 py-4 rounded-2xl font-black bg-[#00D05A] text-black hover:bg-[#00e664] transition-all w-full text-lg shadow-[0_0_20px_rgba(0,208,90,0.4)] transform active:scale-95 duration-200 flex items-center justify-center gap-2">
+                제출하기 <span class="text-2xl ml-1">🎉</span>
+            </button>
+        </footer>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-[100] flex items-center justify-center hidden opacity-0 transition-opacity duration-500">
+        <div class="bg-zinc-900 p-10 rounded-[2rem] max-w-sm w-full mx-6 text-center border-2 border-zinc-800 transform scale-90 transition-transform duration-500 shadow-2xl relative overflow-hidden" id="success-card">
+            <!-- decorative background -->
+            <div class="absolute -top-20 -right-20 w-40 h-40 bg-[#00D05A] rounded-full blur-[80px] opacity-30"></div>
+            
+            <div class="text-7xl mb-6 animate-bounce drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">🏆</div>
+            <h3 class="text-4xl font-black mb-3 text-white italic tracking-tighter">WE RUN!</h3>
+            <p class="text-zinc-300 mb-8 text-lg leading-relaxed">지원이 완료되었습니다.<br>조만간 연락드릴게요!</p>
+            <button onclick="location.reload()" class="w-full py-4 bg-white text-black rounded-xl font-bold hover:bg-zinc-200 transition-colors text-lg active:scale-95">
+                처음으로 돌아가기
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
