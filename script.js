@@ -1,4 +1,35 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Intro Screen Logic ---
+    const introScreen = document.getElementById('intro-screen');
+    const btnStart = document.getElementById('btn-start');
+    const btnStartText = document.getElementById('btn-start-text');
+    const introRunner = document.getElementById('intro-runner');
+
+    if (btnStart) {
+        btnStart.addEventListener('click', () => {
+            // Change button style to look like it was activated
+            btnStartText.innerHTML = '출발! <span class="inline-block text-3xl ml-1">💨</span>';
+            btnStart.classList.add('bg-white', 'scale-110');
+            btnStart.classList.remove('hover:scale-105');
+            
+            // 1. Show and dash the runner across the screen
+            introRunner.style.opacity = '1';
+            introRunner.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+            introRunner.style.left = '120vw'; 
+
+            // 2. Slide the whole intro screen UP after the runner passes
+            setTimeout(() => {
+                introScreen.style.transform = 'translateY(-100vh)';
+            }, 350);
+            
+            // 3. Remove from DOM completely so it doesn't block interactions
+            setTimeout(() => {
+                introScreen.remove();
+            }, 1000);
+        });
+    }
+
+    // --- Form Logic ---
     const steps = document.querySelectorAll('.form-step');
     const btnNext = document.getElementById('btn-next');
     const btnPrev = document.getElementById('btn-prev');
