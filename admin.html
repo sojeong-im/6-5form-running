@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>러닝의민족 2기 - 관리자 페이지</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <style>
+        body { font-family: 'Pretendard', sans-serif; background-color: #111111; color: #f4f4f5; }
+        .table-container { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; min-width: 1200px; }
+        th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid #27272a; }
+        th { background-color: #18181b; color: #00D05A; font-weight: bold; position: sticky; top: 0; z-index: 10; white-space: nowrap; }
+        td { font-size: 0.9rem; }
+        tbody tr:hover { background-color: #27272a; }
+        .badge { background-color: #00D05A; color: black; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: bold; }
+    </style>
+</head>
+<body class="p-4 sm:p-6 overflow-hidden">
+    <!-- Password Overlay -->
+    <div id="password-overlay" class="fixed inset-0 bg-[#111111] z-[100] flex items-center justify-center p-4">
+        <div class="bg-zinc-900 border border-zinc-800 p-8 rounded-2xl shadow-2xl max-w-sm w-full text-center">
+            <div class="text-[#00D05A] font-black text-4xl italic tracking-tighter transform -skew-x-6 mb-6">ADMIN</div>
+            <h2 class="text-white text-lg font-bold mb-6">관리자 비밀번호를 입력해주세요</h2>
+            <input type="password" id="admin-password" class="w-full bg-zinc-800 border border-zinc-700 text-white px-4 py-3 rounded-xl mb-4 focus:outline-none focus:border-[#00D05A] text-center tracking-widest text-lg" placeholder="•••••">
+            <p id="password-error" class="text-red-500 text-sm mb-4 hidden">비밀번호가 일치하지 않습니다.</p>
+            <button id="password-submit" class="w-full bg-[#00D05A] text-black font-black px-4 py-3 rounded-xl hover:bg-[#00e664] transition-colors">확인</button>
+        </div>
+    </div>
+
+    <div class="max-w-[90rem] mx-auto bg-zinc-900 sm:rounded-2xl shadow-xl overflow-hidden border border-zinc-800 flex flex-col h-[95vh] sm:h-[90vh]">
+        <div class="p-6 border-b border-zinc-800 flex justify-between items-center bg-zinc-900 z-20">
+            <h1 class="text-xl sm:text-2xl font-black italic tracking-tight text-white uppercase transform -skew-x-6">
+                러닝의민족 <span class="text-[#00D05A]">관리자</span>
+            </h1>
+            <div class="flex gap-4 items-center">
+                <span class="text-zinc-400 text-sm hidden sm:inline">총 지원자: <span id="total-count" class="text-white font-bold">0</span>명</span>
+                <button id="refresh-btn" class="bg-zinc-800 hover:bg-zinc-700 text-white px-4 py-2 rounded-lg font-bold transition-colors text-sm flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                    새로고침
+                </button>
+            </div>
+        </div>
+        
+        <div class="table-container flex-1 overflow-y-auto relative bg-[#111111]">
+            <table class="w-full">
+                <thead>
+                    <tr>
+                        <th>제출일시</th>
+                        <th>이름</th>
+                        <th>나이</th>
+                        <th>학교/학과</th>
+                        <th>연락처</th>
+                        <th>거주지역</th>
+                        <th>러닝레벨(Q6)</th>
+                        <th>참여요일(Q11)</th>
+                        <th class="sticky right-0 bg-[#18181b]">상세보기</th>
+                    </tr>
+                </thead>
+                <tbody id="applicant-list">
+                    <tr><td colspan="9" class="text-center py-10 text-zinc-500">데이터를 불러오는 중입니다...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal for details -->
+    <div id="detail-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-zinc-900 border border-zinc-800 rounded-2xl w-full max-w-3xl max-h-[90vh] flex flex-col shadow-2xl">
+            <div class="p-5 border-b border-zinc-800 flex justify-between items-center shrink-0">
+                <h2 class="text-lg font-bold text-white flex items-center gap-2">지원서 상세 <span id="modal-name" class="text-[#00D05A]"></span></h2>
+                <button id="close-modal" class="text-zinc-400 hover:text-white transition-colors p-1">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <div class="p-6 overflow-y-auto" id="modal-content">
+                <!-- Content injected via JS -->
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="admin.js"></script>
+</body>
+</html>

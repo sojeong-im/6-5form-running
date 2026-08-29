@@ -1,3 +1,27 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBl0m-be83f0TGtxWHSC1zze1qWq_Sm7no",
+  authDomain: "unning-minjok.firebaseapp.com",
+  projectId: "unning-minjok",
+  storageBucket: "unning-minjok.firebasestorage.app",
+  messagingSenderId: "773747570084",
+  appId: "1:773747570084:web:d8fc76d2849689b3f13d31",
+  measurementId: "G-PW9RPRZ30S"
+};
+
+let db;
+let analytics;
+try {
+    const app = initializeApp(firebaseConfig);
+    analytics = getAnalytics(app);
+    db = getFirestore(app);
+} catch (error) {
+    console.error("Firebase 초기화 에러:", error);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     // --- Intro Screen Logic ---
     const introScreen = document.getElementById('intro-screen');
@@ -97,24 +121,56 @@ document.addEventListener('DOMContentLoaded', () => {
         updateUI();
     });
 
-    btnSubmit.addEventListener('click', (e) => {
+    btnSubmit.addEventListener('click', async (e) => {
         e.preventDefault();
         
         if (validateStep(currentStep)) {
-            // Show Success Modal
-            const modal = document.getElementById('success-modal');
-            const card = document.getElementById('success-card');
-            
-            modal.classList.remove('hidden');
-            // small delay to allow display:block to apply before animating opacity
-            setTimeout(() => {
-                modal.classList.remove('opacity-0');
-                card.classList.remove('scale-90');
-            }, 10);
-            
-            // In a real scenario, you'd serialize the form data and send via fetch/XHR here:
-            // const formData = new FormData(form);
-            // console.log(Object.fromEntries(formData));
+            // 제출 버튼 비활성화 및 로딩 표시
+            const originalText = btnSubmit.innerHTML;
+            btnSubmit.innerHTML = '제출 중... <span class="animate-spin text-2xl ml-1">⏳</span>';
+            btnSubmit.disabled = true;
+
+            try {
+                // Form 데이터 수집
+                const formData = new FormData(form);
+                const data = {};
+                for (const [key, value] of formData.entries()) {
+                    if (data[key]) {
+                        if (!Array.isArray(data[key])) {
+                            data[key] = [data[key]];
+                        }
+                        data[key].push(value);
+                    } else {
+                        data[key] = value;
+                    }
+                }
+                
+                // Firestore에 데이터 저장 (applications 컬렉션)
+                if (db) {
+                    data.createdAt = serverTimestamp();
+                    await addDoc(collection(db, "applications"), data);
+                } else {
+                    console.warn("Firebase가 초기화되지 않았습니다. 데이터를 콘솔에 출력합니다.", data);
+                }
+
+                // Show Success Modal
+                const modal = document.getElementById('success-modal');
+                const card = document.getElementById('success-card');
+                
+                modal.classList.remove('hidden');
+                // small delay to allow display:block to apply before animating opacity
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0');
+                    card.classList.remove('scale-90');
+                }, 10);
+            } catch (error) {
+                console.error("데이터 제출 오류:", error);
+                alert("제출 중 오류가 발생했습니다. 다시 시도해주세요.");
+            } finally {
+                // 버튼 상태 복구
+                btnSubmit.innerHTML = originalText;
+                btnSubmit.disabled = false;
+            }
         } else {
             if (navigator.vibrate) navigator.vibrate(200);
         }

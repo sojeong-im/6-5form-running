@@ -70,32 +70,32 @@
                         <!-- Q1 -->
                         <div class="form-group">
                             <label class="block text-lg font-bold mb-3">1. 이름을 알려주세요!</label>
-                            <input type="text" required class="input-field" placeholder="홍길동">
+                            <input type="text" name="name" required class="input-field" placeholder="홍길동">
                         </div>
                         
                         <!-- Q2 -->
                         <div class="form-group">
                             <label class="block text-lg font-bold mb-3">2. 나이를 알려주세요!</label>
-                            <input type="number" required class="input-field" placeholder="24">
+                            <input type="number" name="age" required class="input-field" placeholder="24">
                         </div>
 
                         <!-- Q3 -->
                         <div class="form-group">
                             <label class="block text-lg font-bold mb-3">3. 학교 / 학과 / 학년을 알려주세요!</label>
                             <p class="text-sm text-zinc-400 mb-3">휴학생이라면 휴학 중이라고 함께 적어주세요 :)</p>
-                            <input type="text" required class="input-field" placeholder="한국대 / 체육학과 / 3학년 (휴학)">
+                            <input type="text" name="school" required class="input-field" placeholder="한국대 / 체육학과 / 3학년 (휴학)">
                         </div>
 
                         <!-- Q4 -->
                         <div class="form-group">
                             <label class="block text-lg font-bold mb-3">4. 연락 가능한 전화번호를 남겨주세요!</label>
-                            <input type="tel" required class="input-field" placeholder="010-1234-5678">
+                            <input type="tel" name="phone" required class="input-field" placeholder="010-1234-5678">
                         </div>
 
                         <!-- Q5 -->
                         <div class="form-group">
                             <label class="block text-lg font-bold mb-3">5. 현재 거주 지역 또는 주로 활동하는 지역은 어디인가요?</label>
-                            <input type="text" required class="input-field" placeholder="예: 관악구 / 신림·서울대입구 부근">
+                            <input type="text" name="location" required class="input-field" placeholder="예: 관악구 / 신림·서울대입구 부근">
                         </div>
                     </div>
                 </section>
@@ -140,14 +140,14 @@
                         <div class="form-group">
                             <label class="block text-lg font-bold mb-2">7. 러닝의민족에서 이루고 싶은 작은 목표가 있나요? 🌱</label>
                             <p class="text-sm text-zinc-400 mb-3">예: 쉬지 않고 3km 뛰기 / 체력 키우기 / 러닝 습관 만들기</p>
-                            <textarea required class="input-field min-h-[100px] resize-none" placeholder="당신의 목표를 들려주세요!"></textarea>
+                            <textarea name="q7" required class="input-field min-h-[100px] resize-none" placeholder="당신의 목표를 들려주세요!"></textarea>
                         </div>
 
                         <!-- Q8 -->
                         <div class="form-group">
                             <label class="block text-lg font-bold mb-2">8. 러닝하다 힘들어서 멈추고 싶을 때, 나를 다시 뛰게 만드는 건 뭘까요?</label>
                             <p class="text-sm text-zinc-400 mb-3">음악, 맛있는 저녁, 옆에서 뛰는 사람, 기록 욕심 등 뭐든 좋아요!</p>
-                            <textarea required class="input-field min-h-[100px] resize-none" placeholder="나만의 원동력은..."></textarea>
+                            <textarea name="q8" required class="input-field min-h-[100px] resize-none" placeholder="나만의 원동력은..."></textarea>
                         </div>
 
                         <!-- Q9 -->
@@ -293,14 +293,14 @@
                         <div class="form-group">
                             <label class="block text-lg font-bold mb-2">13. 러닝 외에도 멤버들과 같이 해보고 싶은 활동이 있다면 알려주세요!</label>
                             <p class="text-sm text-zinc-400 mb-3">예: 한강 피크닉, 등산, 배드민턴, 맛집, 전시 등</p>
-                            <textarea class="input-field min-h-[100px] resize-none" placeholder="자유롭게 적어주세요."></textarea>
+                            <textarea name="q13" class="input-field min-h-[100px] resize-none" placeholder="자유롭게 적어주세요."></textarea>
                         </div>
 
                         <!-- Q14 -->
                         <div class="form-group">
                             <label class="block text-lg font-bold mb-2">14. 마지막으로, 러닝의민족에 지원한 이유를 자유롭게 적어주세요!</label>
                             <p class="text-sm text-zinc-400 mb-3">거창하지 않아도 괜찮아요. 편하게 작성해주세요 :)</p>
-                            <textarea required class="input-field min-h-[150px] resize-none" placeholder="지원 동기를 듬뿍 담아주세요!"></textarea>
+                            <textarea name="q14" required class="input-field min-h-[150px] resize-none" placeholder="지원 동기를 듬뿍 담아주세요!"></textarea>
                         </div>
                     </div>
                 </section>
@@ -336,6 +336,6 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
 </html>
