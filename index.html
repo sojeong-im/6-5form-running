@@ -23,11 +23,18 @@
                 러닝의민족 <span class="text-[#00D05A]">2기</span>
             </h1>
 
-            <button id="btn-start" class="group relative px-10 py-5 rounded-full font-black bg-[#00D05A] text-black transition-all text-2xl shadow-[0_0_30px_rgba(0,208,90,0.5)] transform hover:scale-105 active:scale-95 duration-200 overflow-hidden z-30">
-                <span id="btn-start-text" class="relative z-10 flex items-center justify-center gap-2">
-                    지원하기 <span class="animate-bounce inline-block text-3xl">👇</span>
-                </span>
-            </button>
+            <div class="flex flex-col sm:flex-row gap-4 z-30">
+                <button id="btn-start" class="group relative px-10 py-5 rounded-full font-black bg-[#00D05A] text-black transition-all text-2xl shadow-[0_0_30px_rgba(0,208,90,0.5)] transform hover:scale-105 active:scale-95 duration-200 overflow-hidden">
+                    <span id="btn-start-text" class="relative z-10 flex items-center justify-center gap-2">
+                        지원하기 <span class="animate-bounce inline-block text-3xl">👇</span>
+                    </span>
+                </button>
+                <button id="btn-ounwan" type="button" class="group relative px-10 py-5 rounded-full font-black bg-zinc-800 text-white transition-all text-2xl border border-zinc-700 hover:bg-zinc-700 shadow-lg transform hover:scale-105 active:scale-95 duration-200 overflow-hidden">
+                    <span class="relative z-10 flex items-center justify-center gap-2">
+                        오운완 인증 📸
+                    </span>
+                </button>
+            </div>
             
             <!-- Hidden runner that will dash across -->
             <div id="intro-runner" class="fixed top-1/2 -translate-y-1/2 text-[120px] opacity-0 pointer-events-none z-20 transform -scale-x-100 drop-shadow-[0_0_30px_rgba(0,208,90,0.8)]" style="left: -200px;">🏃</div>
@@ -333,6 +340,71 @@
             <button onclick="location.reload()" class="w-full py-4 bg-white text-black rounded-xl font-bold hover:bg-zinc-200 transition-colors text-lg active:scale-95">
                 처음으로 돌아가기
             </button>
+        </div>
+    </div>
+
+    <!-- Ounwan Feed Screen -->
+    <div id="ounwan-screen" class="fixed inset-0 z-[90] bg-[#111111] hidden flex-col overflow-hidden opacity-0 transition-opacity duration-500">
+        <header class="shrink-0 pt-6 pb-4 px-6 border-b border-zinc-800 bg-[#111111]/95 sticky top-0 z-50 flex items-center justify-between">
+            <h2 class="text-2xl font-black text-white italic tracking-tight uppercase transform -skew-x-6">
+                오운완 <span class="text-[#00D05A]">인증</span>
+            </h2>
+            <button id="btn-close-ounwan" class="text-zinc-400 hover:text-white transition-colors">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </header>
+        <main class="flex-1 overflow-y-auto px-4 py-6 scroll-smooth bg-zinc-900/50" id="ounwan-feed">
+            <!-- Feed items will be rendered here via JS -->
+        </main>
+        <div class="absolute bottom-8 right-6 z-50">
+            <button id="btn-open-upload" class="bg-[#00D05A] text-black w-14 h-14 rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(0,208,90,0.5)] transform hover:scale-110 active:scale-95 transition-all">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Ounwan Upload Modal -->
+    <div id="ounwan-upload-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-[100] flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-zinc-900 p-6 sm:p-8 rounded-[2rem] max-w-md w-full mx-4 border border-zinc-800 transform scale-95 transition-transform duration-300 relative flex flex-col max-h-[90vh]">
+            <div class="flex justify-between items-center mb-6 shrink-0">
+                <h3 class="text-2xl font-black text-white italic tracking-tighter">인증 올리기 📸</h3>
+                <button type="button" id="btn-close-upload" class="text-zinc-400 hover:text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            
+            <form id="ounwan-form" class="space-y-5 overflow-y-auto pr-2 pb-4 flex-1">
+                <div>
+                    <label class="block text-sm font-bold text-zinc-300 mb-2">사진 업로드</label>
+                    <div class="relative border-2 border-dashed border-zinc-700 rounded-xl bg-zinc-800/50 hover:bg-zinc-800 transition-colors cursor-pointer group h-48 flex items-center justify-center overflow-hidden" id="photo-upload-container">
+                        <input type="file" id="ounwan-photo" accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" required>
+                        <div class="text-center z-0" id="photo-placeholder">
+                            <div class="text-4xl mb-2 group-hover:scale-110 transition-transform">📷</div>
+                            <span class="text-zinc-400 text-sm">터치해서 사진 선택</span>
+                        </div>
+                        <img id="photo-preview" class="absolute inset-0 w-full h-full object-cover hidden z-0">
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-bold text-zinc-300 mb-2">날짜</label>
+                    <input type="date" id="ounwan-date" required class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#00D05A] transition-colors" value="2026-09-01">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-bold text-zinc-300 mb-2">내용</label>
+                    <textarea id="ounwan-content" required class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#00D05A] transition-colors resize-none h-24" placeholder="오늘의 러닝은 어땠나요?"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-zinc-300 mb-2">회원 코드</label>
+                    <input type="password" id="ounwan-code" required class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#00D05A] transition-colors" placeholder="동아리 회원 코드 (예: RUN2026)">
+                </div>
+
+                <button type="submit" class="w-full py-4 rounded-xl font-black bg-[#00D05A] text-black hover:bg-[#00e664] transition-all text-lg shadow-[0_0_15px_rgba(0,208,90,0.3)] active:scale-95">
+                    인증하기 🔥
+                </button>
+            </form>
         </div>
     </div>
 

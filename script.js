@@ -257,3 +257,145 @@ document.addEventListener('DOMContentLoaded', () => {
         return isValid;
     }
 });
+
+    // --- Ounwan Logic ---
+    const btnOunwan = document.getElementById('btn-ounwan');
+    const ounwanScreen = document.getElementById('ounwan-screen');
+    const btnCloseOunwan = document.getElementById('btn-close-ounwan');
+    const ounwanFeed = document.getElementById('ounwan-feed');
+    
+    const btnOpenUpload = document.getElementById('btn-open-upload');
+    const ounwanUploadModal = document.getElementById('ounwan-upload-modal');
+    const btnCloseUpload = document.getElementById('btn-close-upload');
+    const ounwanForm = document.getElementById('ounwan-form');
+    
+    const photoUploadInput = document.getElementById('ounwan-photo');
+    const photoPreview = document.getElementById('photo-preview');
+    const photoPlaceholder = document.getElementById('photo-placeholder');
+
+    const mockOunwanData = [
+        { id: 5, image: 'assets/media_1788220424652.jpg', date: '2026-08-01', content: '야간 러닝 최고! 🌃' },
+        { id: 4, image: 'assets/media_1788220423018.jpg', date: '2026-06-25', content: '여름이 다가온다! 땀 빼니까 개운해요 ✨' },
+        { id: 3, image: 'assets/media_1788220421220.jpg', date: '2026-05-18', content: '오랜만에 한강공원 러닝 🏃‍♀️' },
+        { id: 2, image: 'assets/media_1788220419912.jpg', date: '2026-04-20', content: '퇴근 후 스트레스 풀기 완료 🔥' },
+        { id: 1, image: 'assets/media_1788220417456.jpg', date: '2026-03-15', content: '봄 바람 맞으며 가볍게 5km 런! 🌸' }
+    ];
+
+    function renderOunwanFeed() {
+        ounwanFeed.innerHTML = '';
+        if (mockOunwanData.length === 0) {
+            ounwanFeed.innerHTML = '<div class="text-center text-zinc-500 mt-10">첫 번째 인증을 올려주세요!</div>';
+            return;
+        }
+
+        mockOunwanData.forEach(data => {
+            const card = document.createElement('div');
+            card.className = 'bg-zinc-800 rounded-2xl p-4 mb-5 shadow-lg border border-zinc-700';
+            card.innerHTML = `
+                <div class="flex justify-between items-center mb-3">
+                    <span class="font-bold text-white">🏃 동아리원</span>
+                    <span class="text-sm text-zinc-400">${data.date}</span>
+                </div>
+                <img src="${data.image}" alt="오운완 인증" class="w-full h-64 object-cover rounded-xl mb-3">
+                <p class="text-zinc-200 leading-relaxed">${data.content}</p>
+            `;
+            ounwanFeed.appendChild(card);
+        });
+    }
+
+    if (btnOunwan) {
+        btnOunwan.addEventListener('click', () => {
+            renderOunwanFeed();
+            ounwanScreen.classList.remove('hidden');
+            setTimeout(() => {
+                ounwanScreen.classList.remove('opacity-0');
+            }, 10);
+        });
+    }
+
+    if (btnCloseOunwan) {
+        btnCloseOunwan.addEventListener('click', () => {
+            ounwanScreen.classList.add('opacity-0');
+            setTimeout(() => {
+                ounwanScreen.classList.add('hidden');
+            }, 500);
+        });
+    }
+
+    if (btnOpenUpload) {
+        btnOpenUpload.addEventListener('click', () => {
+            ounwanUploadModal.classList.remove('hidden');
+            setTimeout(() => {
+                ounwanUploadModal.classList.remove('opacity-0');
+                ounwanUploadModal.querySelector('div').classList.remove('scale-95');
+            }, 10);
+        });
+    }
+
+    if (btnCloseUpload) {
+        btnCloseUpload.addEventListener('click', () => {
+            ounwanUploadModal.classList.add('opacity-0');
+            ounwanUploadModal.querySelector('div').classList.add('scale-95');
+            setTimeout(() => {
+                ounwanUploadModal.classList.add('hidden');
+                // Reset form
+                ounwanForm.reset();
+                photoPreview.classList.add('hidden');
+                photoPreview.src = '';
+                photoPlaceholder.classList.remove('hidden');
+            }, 300);
+        });
+    }
+
+    if (photoUploadInput) {
+        photoUploadInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    photoPreview.src = e.target.result;
+                    photoPreview.classList.remove('hidden');
+                    photoPlaceholder.classList.add('hidden');
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+
+    if (ounwanForm) {
+        ounwanForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const codeInput = document.getElementById('ounwan-code').value;
+            if (codeInput !== 'RUN2026') {
+                alert('회원 코드가 올바르지 않습니다.');
+                return;
+            }
+
+            const date = document.getElementById('ounwan-date').value;
+            const content = document.getElementById('ounwan-content').value;
+            const imgSrc = photoPreview.src;
+
+            if (!imgSrc) {
+                alert('사진을 업로드해주세요!');
+                return;
+            }
+
+            // Add new data to the top
+            const newData = {
+                id: Date.now(),
+                image: imgSrc,
+                date: date,
+                content: content
+            };
+
+            mockOunwanData.unshift(newData);
+            renderOunwanFeed();
+            
+            // Close modal
+            btnCloseUpload.click();
+            
+            // Scroll to top of feed
+            ounwanFeed.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
