@@ -275,7 +275,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         return isValid;
     }
-});
 
     // --- Ounwan Logic ---
     const btnOunwan = document.getElementById('btn-ounwan');
@@ -336,6 +335,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btnOunwan.addEventListener('click', () => {
             renderOunwanFeed();
             ounwanScreen.classList.remove('hidden');
+            ounwanScreen.classList.add('flex');
             setTimeout(() => {
                 ounwanScreen.classList.remove('opacity-0');
             }, 10);
@@ -347,6 +347,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ounwanScreen.classList.add('opacity-0');
             setTimeout(() => {
                 ounwanScreen.classList.add('hidden');
+                ounwanScreen.classList.remove('flex');
             }, 500);
         });
     }
@@ -428,3 +429,4 @@ document.addEventListener('DOMContentLoaded', () => {
             ounwanFeed.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
+});
