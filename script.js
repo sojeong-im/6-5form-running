@@ -292,21 +292,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const photoPlaceholder = document.getElementById('photo-placeholder');
 
     const mockOunwanData = [
-        { id: 15, image: 'assets/media_1788220424652.jpg', date: '2026-08-10', content: '야간 러닝 최고! 🌃' },
-        { id: 14, image: 'assets/media_1788220699372.jpg', date: '2026-07-25', content: '러닝 후 마시는 커피 한잔의 여유 ☕️' },
-        { id: 13, image: 'assets/media_1788220767803.jpg', date: '2026-07-10', content: '트랙에서 기록 측정의 날 ⏱️ 달리기 딱 좋은 날씨!' },
-        { id: 12, image: 'assets/media_1788220423018.jpg', date: '2026-06-25', content: '여름이 다가온다! 땀 빼니까 개운해요 ✨' },
-        { id: 11, image: 'assets/media_1788220687602.jpg', date: '2026-06-15', content: '날씨가 너무 맑아서 뛰기 좋았어요 ☁️' },
-        { id: 10, image: 'assets/media_1788220755950.jpg', date: '2026-06-05', content: '새로 산 러닝화 개시! 완전 푹신해요 👟' },
-        { id: 9, image: 'assets/media_1788220421220.jpg', date: '2026-05-25', content: '오랜만에 한강공원 러닝 🏃‍♀️' },
-        { id: 8, image: 'assets/media_1788220749801.jpg', date: '2026-05-15', content: '오늘은 가볍게 산책 느낌으로 러닝 🚶‍♀️' },
-        { id: 7, image: 'assets/media_1788220686651.jpg', date: '2026-05-02', content: '다리 밑에서 쉬면서 한 컷 📸' },
-        { id: 6, image: 'assets/media_1788220419912.jpg', date: '2026-04-25', content: '퇴근 후 스트레스 풀기 완료 🔥' },
-        { id: 5, image: 'assets/media_1788220685034.jpg', date: '2026-04-10', content: '오늘 노을 너무 예쁘다 🌅' },
-        { id: 4, image: 'assets/media_1788220748488.jpg', date: '2026-04-01', content: '러닝 끝나고 다같이 모여서 휴식 중! 😌' },
-        { id: 3, image: 'assets/media_1788220417456.jpg', date: '2026-03-20', content: '봄 바람 맞으며 가볍게 5km 런! 🌸' },
-        { id: 2, image: 'assets/media_1788220746836.jpg', date: '2026-03-10', content: '다 같이 달리기 전 화이팅! 🤜🤛' },
-        { id: 1, image: 'assets/media_1788220681677.jpg', date: '2026-03-01', content: '새로운 마음으로 시작! 💪' }
+        { id: 15, image: 'assets/media_1788220424652.jpg', date: '2026-08-10', time: '1시간 10분' },
+        { id: 14, image: 'assets/media_1788220699372.jpg', date: '2026-07-25', time: '45분' },
+        { id: 13, image: 'assets/media_1788220767803.jpg', date: '2026-07-10', time: '50분' },
+        { id: 12, image: 'assets/media_1788220423018.jpg', date: '2026-06-25', time: '1시간' },
+        { id: 11, image: 'assets/media_1788220687602.jpg', date: '2026-06-15', time: '35분' },
+        { id: 10, image: 'assets/media_1788220755950.jpg', date: '2026-06-05', time: '40분' },
+        { id: 9, image: 'assets/media_1788220421220.jpg', date: '2026-05-25', time: '55분' },
+        { id: 8, image: 'assets/media_1788220749801.jpg', date: '2026-05-15', time: '30분' },
+        { id: 7, image: 'assets/media_1788220686651.jpg', date: '2026-05-02', time: '1시간 5분' },
+        { id: 6, image: 'assets/media_1788220419912.jpg', date: '2026-04-25', time: '45분' },
+        { id: 5, image: 'assets/media_1788220685034.jpg', date: '2026-04-10', time: '50분' },
+        { id: 4, image: 'assets/media_1788220748488.jpg', date: '2026-04-01', time: '1시간 20분' },
+        { id: 3, image: 'assets/media_1788220417456.jpg', date: '2026-03-20', time: '40분' },
+        { id: 2, image: 'assets/media_1788220746836.jpg', date: '2026-03-10', time: '1시간' },
+        { id: 1, image: 'assets/media_1788220681677.jpg', date: '2026-03-01', time: '35분' }
     ];
 
     function renderOunwanFeed() {
@@ -321,11 +321,15 @@ document.addEventListener('DOMContentLoaded', () => {
             card.className = 'bg-zinc-800 rounded-2xl p-4 mb-5 shadow-lg border border-zinc-700';
             card.innerHTML = `
                 <div class="flex justify-between items-center mb-3">
-                    <span class="font-bold text-white">🏃 동아리원</span>
-                    <span class="text-sm text-zinc-400">${data.date}</span>
+                    <span class="font-bold text-white flex items-center gap-2"><div class="w-6 h-6 rounded-full bg-zinc-600 flex items-center justify-center text-xs">🏃</div> 동아리원</span>
                 </div>
-                <img src="${data.image}" alt="오운완 인증" class="w-full h-64 object-cover rounded-xl mb-3">
-                <p class="text-zinc-200 leading-relaxed">${data.content}</p>
+                <div class="relative overflow-hidden rounded-xl">
+                    <img src="${data.image}" alt="오운완 인증" class="w-full h-72 object-cover">
+                    <div class="absolute bottom-3 left-3 bg-black/70 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10 shadow-lg">
+                        <div class="text-white font-black text-xl tracking-tight leading-tight">${data.date}</div>
+                        <div class="text-[#00D05A] font-bold text-sm mt-0.5">⏱️ ${data.time} 러닝 완료</div>
+                    </div>
+                </div>
             `;
             ounwanFeed.appendChild(card);
         });
@@ -403,7 +407,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const date = document.getElementById('ounwan-date').value;
-            const content = document.getElementById('ounwan-content').value;
+            const timeStr = document.getElementById('ounwan-time').value;
             const imgSrc = photoPreview.src;
 
             if (!imgSrc) {
@@ -413,10 +417,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Add new data to the top
             const newData = {
-                id: Date.now(),
+                id: mockOunwanData.length + 1,
                 image: imgSrc,
                 date: date,
-                content: content
+                time: timeStr
             };
 
             mockOunwanData.unshift(newData);
