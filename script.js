@@ -46,9 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 introScreen.style.transform = 'translateY(-100vh)';
             }, 350);
             
-            // 3. Remove from DOM completely so it doesn't block interactions
+            // 3. Hide it so it doesn't block interactions
             setTimeout(() => {
-                introScreen.remove();
+                introScreen.classList.add('hidden');
             }, 1000);
         });
     }
@@ -107,6 +107,22 @@ document.addEventListener('DOMContentLoaded', () => {
     btnPrev.addEventListener('click', (e) => {
         e.preventDefault();
         
+        if (currentStep === 0) {
+            // Restore intro screen
+            introScreen.classList.remove('hidden');
+            setTimeout(() => {
+                introScreen.style.transform = 'translateY(0)';
+                // Reset button and runner
+                btnStartText.innerHTML = '지원하기 <span class="animate-bounce inline-block text-3xl">👇</span>';
+                btnStart.classList.remove('bg-white', 'scale-110');
+                btnStart.classList.add('hover:scale-105');
+                introRunner.style.transition = 'none';
+                introRunner.style.opacity = '0';
+                introRunner.style.left = '-200px';
+            }, 10);
+            return;
+        }
+
         steps[currentStep].classList.remove('slide-in-right');
         steps[currentStep].classList.add('hidden', 'active');
         
@@ -178,18 +194,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateUI() {
         // Update Buttons
-        if (currentStep === 0) {
-            btnPrev.classList.add('hidden');
-            btnNext.classList.replace('w-2/3', 'w-full');
-        } else {
-            btnPrev.classList.remove('hidden');
+        btnPrev.classList.remove('hidden');
+        if (btnNext.classList.contains('w-full')) {
             btnNext.classList.replace('w-full', 'w-2/3');
+        }
+        
+        if (currentStep === 0) {
+            btnPrev.textContent = '메인으로';
+        } else {
+            btnPrev.textContent = '이전';
         }
 
         if (currentStep === totalSteps - 1) {
             btnNext.classList.add('hidden');
             btnSubmit.classList.remove('hidden');
-            if(currentStep !== 0) btnSubmit.classList.replace('w-full', 'w-2/3');
+            btnSubmit.classList.replace('w-full', 'w-2/3');
         } else {
             btnNext.classList.remove('hidden');
             btnSubmit.classList.add('hidden');
